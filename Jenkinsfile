@@ -18,5 +18,11 @@ pipeline {
                 sh "mvn test"
             }
         }
+        stage('Integration Testing') {
+            steps {
+                sh "sleep ${params.SLEEP_TIMER}"
+                sh """ curl -s http://localhost:${params.APPLICATION_PORT}/hello | grep -i "Hello, KodeKloud community!" """
+        }
+}
     }
 }
